@@ -3,5 +3,17 @@
 version = 3
 
 [[package]]
-name = "algos_on_strings_trees_sequences"
+name = "algorithms"
+version = "0.1.0"
+
+[[package]]
+name = "cli"
+version = "0.1.0"
+
+[[package]]
+name = "sequence_algorithms"
+version = "0.1.0"
+
+[[package]]
+name = "server"
 version = "0.1.0"
