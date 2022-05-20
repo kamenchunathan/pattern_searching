@@ -1,5 +1,3 @@
-#[allow(dead_code)]
-
 /// Exact matching using the naive method,
 ///
 /// Aligns the left of the pattern (P) to the left ot the text (T) and compares
@@ -8,7 +6,11 @@
 /// P is then shifted one step to the right and comparisons are restarted from
 /// the left end of P, repeating until the end of P shifts past the end of T
 #[allow(non_snake_case)]
-fn match_exact_naive(pattern: &str, text: &str) -> Vec<usize> {
+pub fn match_exact_naive(pattern: &str, text: &str) -> Vec<usize> {
+    if pattern.is_empty() {
+        return vec![];
+    }
+
     // A vector of the matches
     // A match is recorded as the index of the letter in the text where the match
     // occured and the length of the characters that match
@@ -26,9 +28,11 @@ fn match_exact_naive(pattern: &str, text: &str) -> Vec<usize> {
                 break;
             }
 
-            // A Match has been found: end of the patter without breaking the loop
+            // A Match has been found: end of the pattern without breaking the loop
             if j == pattern.len() - 1 {
                 matches.push(i);
+            } else {
+                println!("j: {}, pattern.len(): {}", j, pattern.len());
             }
         }
     }
