@@ -5,7 +5,7 @@
 /// found or until P is exhausted
 /// P is then shifted one step to the right and comparisons are restarted from
 /// the left end of P, repeating until the end of P shifts past the end of T
-pub fn exact_match(pattern: &str, text: &str) -> Vec<usize> {
+pub fn match_exact(pattern: &str, text: &str) -> Vec<usize> {
     // A vector of the matches
     // A match is recorded as the index of the letter in the text where the match
     // occured and the length of the characters that match
@@ -28,58 +28,55 @@ pub fn exact_match(pattern: &str, text: &str) -> Vec<usize> {
 
 #[cfg(test)]
 mod tests {
-    use crate::naive_self::match_exact_naive;
+    use super::*;
 
     #[test]
     fn empty_pattern() {
-        assert_eq!(match_exact_naive("", "Hello World",), []);
+        assert_eq!(match_exact("", "Hello World",), []);
     }
 
     #[test]
     fn empty_text() {
-        assert_eq!(match_exact_naive("nothing", "",), []);
+        assert_eq!(match_exact("nothing", "",), []);
     }
 
     #[test]
     fn empty_pattern_and_text() {
-        assert_eq!(match_exact_naive("", "",), []);
+        assert_eq!(match_exact("", "",), []);
     }
 
     #[test]
     fn match_first_character() {
-        assert_eq!(match_exact_naive("H", "Hello World",), [0]);
+        assert_eq!(match_exact("H", "Hello World",), [0]);
     }
 
     #[test]
     fn match_last_character() {
-        assert_eq!(match_exact_naive("d", "Hello World",), [10]);
+        assert_eq!(match_exact("d", "Hello World",), [10]);
     }
 
     #[test]
     fn match_single_character() {
-        assert_eq!(match_exact_naive("e", "Hello World",), [1]);
+        assert_eq!(match_exact("e", "Hello World",), [1]);
     }
 
     #[test]
     fn multiple_occurences_of_single_char() {
-        assert_eq!(match_exact_naive("o", "Hello World",), [4, 7]);
+        assert_eq!(match_exact("o", "Hello World",), [4, 7]);
     }
 
     #[test]
     fn multiple_occurences_longer_pattern() {
-        assert_eq!(
-            match_exact_naive("ell", "Hello to a yellow hell",),
-            [1, 12, 19]
-        );
+        assert_eq!(match_exact("ell", "Hello to a yellow hell",), [1, 12, 19]);
     }
 
     #[test]
     fn consequtive_occurences_of_single_char() {
-        assert_eq!(match_exact_naive("l", "Hello World",), [2, 3, 9]);
+        assert_eq!(match_exact("l", "Hello World",), [2, 3, 9]);
     }
 
     #[test]
     fn overlapping_sequences() {
-        assert_eq!(match_exact_naive("pip", "pipip",), [0, 2]);
+        assert_eq!(match_exact("pip", "pipip",), [0, 2]);
     }
 }
