@@ -1,3 +1,3 @@
-mod naive_self;
+mod naive;
 
-pub use naive_self::match_exact_naive;
+pub use naive::exact_match;

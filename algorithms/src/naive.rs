@@ -5,7 +5,7 @@
 /// found or until P is exhausted
 /// P is then shifted one step to the right and comparisons are restarted from
 /// the left end of P, repeating until the end of P shifts past the end of T
-pub fn match_exact_naive(pattern: &str, text: &str) -> Vec<usize> {
+pub fn exact_match(pattern: &str, text: &str) -> Vec<usize> {
     // A vector of the matches
     // A match is recorded as the index of the letter in the text where the match
     // occured and the length of the characters that match
