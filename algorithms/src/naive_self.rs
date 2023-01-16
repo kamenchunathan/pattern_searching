@@ -5,24 +5,14 @@
 /// found or until P is exhausted
 /// P is then shifted one step to the right and comparisons are restarted from
 /// the left end of P, repeating until the end of P shifts past the end of T
-#[allow(non_snake_case)]
 pub fn match_exact_naive(pattern: &str, text: &str) -> Vec<usize> {
-    if pattern.is_empty() {
-        return vec![];
-    }
-
     // A vector of the matches
     // A match is recorded as the index of the letter in the text where the match
     // occured and the length of the characters that match
     let mut matches = Vec::new();
 
-    'text_loop: for i in 0..text.len() {
+    for i in 0..=(usize::saturating_sub(text.len(), pattern.len())) {
         for j in 0..pattern.len() {
-            // the end of P has moved past the end of T
-            if i + pattern.len() > text.len() {
-                break 'text_loop;
-            }
-
             // unequal characters
             if pattern.chars().nth(j) != text.chars().nth(i + j) {
                 break;
