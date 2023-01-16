@@ -19,11 +19,7 @@ pub fn match_exact_naive(pattern: &str, text: &str) -> Vec<usize> {
             }
 
             // A Match has been found: end of the pattern without breaking the loop
-            if j == pattern.len() - 1 {
-                matches.push(i);
-            } else {
-                println!("j: {}, pattern.len(): {}", j, pattern.len());
-            }
+            matches.push(i);
         }
     }
 
