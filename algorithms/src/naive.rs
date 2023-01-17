@@ -19,7 +19,9 @@ pub fn match_exact(pattern: &str, text: &str) -> Vec<usize> {
             }
 
             // A Match has been found: end of the pattern without breaking the loop
-            matches.push(i);
+            if j == pattern.len() - 1 {
+                matches.push(i);
+            }
         }
     }
 
@@ -68,6 +70,10 @@ mod tests {
     #[test]
     fn multiple_occurences_longer_pattern() {
         assert_eq!(match_exact("ell", "Hello to a yellow hell",), [1, 12, 19]);
+    }
+    #[test]
+    fn partial_match_of_the_pattern() {
+        assert_eq!(match_exact("ell", "Hello, ask for help",), [1]);
     }
 
     #[test]
